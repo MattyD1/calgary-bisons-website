@@ -43,6 +43,6 @@
 
 @layer components {
   .highlight {
-    @apply after:absolute after:right-0 after:mt-7 after:block after:h-[3px] after:w-0 after:bg-accent after:content-[''] after:duration-200 after:ease-in hover:after:left-0 hover:after:w-full hover:after:bg-accent
+    @apply relative after:absolute after:right-0 after:mt-7 after:block after:h-[3px] after:w-0 after:bg-accent after:content-[''] after:duration-200 after:ease-in hover:after:left-0 hover:after:w-full hover:after:bg-accent
   }
 }
