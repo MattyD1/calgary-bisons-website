@@ -1,0 +1,9 @@
+query GlobalSite {
+  _site {
+    faviconMetaTags {
+      attributes
+      content
+      tag
+    }
+  }
+}

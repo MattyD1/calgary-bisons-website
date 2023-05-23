@@ -1,0 +1,261 @@
+query Home {
+  allLandingPages {
+    id
+    _status
+    _firstPublishedAt
+    _seoMetaTags {
+      attributes
+      content
+      tag
+    }
+    heroBanner {
+      ...heroImage
+    }
+    sections {
+      ...commonBlock
+      ...imageTextBlock
+      ...imageGalleryBlock
+      ...imagesWithTextBlock
+      ...videoBlock
+    }
+    shaded {
+      ... on CommonBannerRecord {
+        id
+        name
+      }
+      ... on ImageTextRecord {
+        id
+        name
+      }
+      ... on ImagesWithGalleryRecord {
+        id
+        name
+      }
+      ... on ImagesWithTextRecord {
+        id
+        name
+      }
+      ... on VideoRecord {
+        id
+        name
+      }
+    }
+    position
+  }
+}
+
+fragment heroImage on HeroImageRecord {
+  id
+  name
+  __typename
+  hasButtons
+  hasOverlay
+  image {
+    ...responsiveImage
+  }
+  buttons {
+    color {
+      hex
+    }
+    hierarchy
+    id
+    label
+  }
+  heading {
+    value
+  }
+  highlightColor {
+    hex
+  }
+  overlayColor {
+    hex
+  }
+  paragraph {
+    value
+  }
+  showcaseBanner {
+    hasHeading
+    title
+    id
+    name
+    links {
+      ...links
+    }
+  }
+}
+
+fragment commonBlock on CommonBannerRecord {
+  id
+  __typename
+  hasHeading
+  title
+  links {
+    ...links
+  }
+  name
+}
+
+fragment imageTextBlock on ImageTextRecord {
+  id
+  name
+  __typename
+  hasKicker
+  hasOverlay
+  buttons {
+    color {
+      hex
+    }
+    hierarchy
+    id
+    label
+  }
+  heading {
+    value
+  }
+  highlightColor {
+    hex
+  }
+  image {
+    ...responsiveImage
+  }
+  text {
+    value
+  }
+  tintColor {
+    hex
+  }
+}
+
+fragment imageGalleryBlock on ImagesWithGalleryRecord {
+  id
+  name
+  __typename
+  gridSize
+  heading {
+    value
+  }
+  hasKicker
+  highlightColor {
+    hex
+  }
+  infiniteScroll
+  isCarousel
+  kicker
+  text {
+    value
+  }
+  gallery {
+    hasText
+    heading
+    id
+    actionButton {
+      ...button
+    }
+    image {
+      ...responsiveImage
+    }
+    text {
+      value
+    }
+  }
+}
+
+fragment imagesWithTextBlock on ImagesWithTextRecord {
+  id
+  name
+  __typename
+  hasKicker
+  heading {
+    value
+  }
+  highlightColor {
+    hex
+  }
+  kicker
+  text {
+    value
+  }
+  imagesBlock {
+    ...imageBlock
+  }
+}
+
+fragment videoBlock on VideoRecord {
+  id
+  name
+  __typename
+  autoplay
+  isExternal
+  placeholder {
+    ...responsiveImage
+  }
+  internalVideo {
+    id
+  }
+  externalVideo {
+    height
+    provider
+    thumbnailUrl
+    providerUid
+    title
+    url
+    width
+  }
+}
+
+fragment imageBlock on ImageWithTextRecord {
+  id
+  actionButton {
+    ...button
+  }
+  hasText
+  heading
+  id
+  image {
+    ...responsiveImage
+  }
+  text {
+    value
+  }
+}
+
+fragment links on PlacementRecord {
+  description {
+    value
+  }
+  hasHeading
+  id
+  logotype {
+    id
+  }
+  name
+  officialWebsite
+  position
+  tagline
+  title
+}
+
+fragment button on ButtonRecord {
+  color {
+    hex
+  }
+  hierarchy
+  id
+  label
+}
+
+fragment responsiveImage on FileFieldInterface {
+  responsiveImage(imgixParams: { fit: crop, ar: "3:2", sat: -100 }) {
+    alt
+    aspectRatio
+    base64
+    bgColor
+    height
+    sizes
+    src
+    srcSet
+    title
+    webpSrcSet
+    width
+  }
+}
