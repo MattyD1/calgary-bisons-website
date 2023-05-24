@@ -226,7 +226,7 @@ fragment links on PlacementRecord {
   hasHeading
   id
   logotype {
-    id
+    ...responsiveImage
   }
   name
   officialWebsite
@@ -245,7 +245,7 @@ fragment button on ButtonRecord {
 }
 
 fragment responsiveImage on FileFieldInterface {
-  responsiveImage(imgixParams: { fit: crop, ar: "3:2", sat: -100 }) {
+  responsiveImage(imgixParams: { sat: -100 }) {
     alt
     aspectRatio
     base64

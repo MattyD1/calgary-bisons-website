@@ -51,6 +51,12 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-sans)", fontFamily.sans],
         heading: ["var(--font-heading)", fontFamily.sans],
+        serif: ["var(--font-arvo)", fontFamily.serif],
+      },
+      minHeight: {
+        "2/3": "66.6vh",
+        "3/4": "75vh",
+        "1/2": "50vh",
       },
       keyframes: {
         enterFromRight: {

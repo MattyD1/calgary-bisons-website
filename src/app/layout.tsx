@@ -1,5 +1,9 @@
 import "@/styles/globals.css"
-import { Montserrat as FontSans, Open_Sans as Heading } from "next/font/google"
+import {
+  Arvo,
+  Montserrat as FontSans,
+  Open_Sans as Heading,
+} from "next/font/google"
 import {
   GlobalSiteDocument,
   GlobalSiteQuery,
@@ -15,25 +19,31 @@ import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { MainNav } from "../components/navigation/main-nav"
 
 const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" })
-
 const heading = Heading({ subsets: ["latin"], variable: "--font-heading" })
+const arvo = Arvo({
+  subsets: ["latin"],
+  weight: "700",
+  variable: "--font-arvo",
+})
 
 interface IRootLayoutProps {
   children: React.ReactNode
 }
 
 export default async function RootLayout({ children }: IRootLayoutProps) {
-  // const site: GlobalSiteQuery = await request(GlobalSiteDocument)
+  const site: GlobalSiteQuery = await request(GlobalSiteDocument)
 
   return (
     <html lang="en" suppressHydrationWarning>
-      {/* {renderMetaTags(site._site.faviconMetaTags)} */}
+      {renderMetaTags(site._site.faviconMetaTags)}
       <body
         className={tw(
-          "min-h-screen bg-primary/75 font-sans antialiased",
+          "min-h-screen font-sans antialiased",
           fontSans.variable,
-          heading.variable
+          heading.variable,
+          arvo.variable
         )}
+        suppressHydrationWarning={true}
       >
         <MainNav />
         {children}

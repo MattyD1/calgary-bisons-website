@@ -20,11 +20,12 @@ import {
 
 import { buttonVariants } from "../common/button"
 
+// TODO: Clean this up it is a bit messy
 export const MainNav = () => {
   const segment = useSelectedLayoutSegment()
 
   return (
-    <div className="gap-6 bg-transparent text-background">
+    <div className="absolute z-50 w-full gap-6 bg-transparent text-background">
       <div className="relative flex w-full items-center px-8 py-2">
         <NavigationMenu delayDuration={100} className="flex flex-1">
           <NavigationMenuList className="relative flex w-full items-center">
@@ -51,7 +52,7 @@ export const MainNav = () => {
             <NavigationMenuItem>
               <NavigationMenuTrigger>Programs</NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="one m-0 grid list-none gap-x-[10px] p-[22px] sm:w-[700px]  sm:grid-cols-[0.75fr_1fr]">
+                <ul className="one m-0 grid list-none gap-x-[10px] p-[22px] sm:w-[700px]  sm:grid-cols-[0.6fr_1fr]">
                   <li className="row-span-5 grid">
                     <NavigationMenuLink asChild>
                       <a
@@ -64,8 +65,8 @@ export const MainNav = () => {
                           Off Season Training
                         </div>
                         <p className="text-mauve4 text-[14px] leading-[1.3]">
-                          Personal strength and conditioning, hitting, pitching,
-                          fielding coaching
+                          Personal coaching in strength and conditioning,
+                          hitting, pitching, and fielding.
                         </p>
                       </a>
                     </NavigationMenuLink>
@@ -317,7 +318,7 @@ const ListItem = React.forwardRef<
         <div className="mb-[5px] font-medium leading-[1.2] text-primary-foreground">
           {title}
         </div>
-        <p className="text-sm leading-[1.4] text-muted-foreground">
+        <p className="text-sm leading-[1.4] text-primary-foreground/70">
           {children}
         </p>
       </a>
@@ -353,7 +354,7 @@ const ListItemImage = React.forwardRef<
           <div className="mb-[5px] font-medium leading-[1.2] text-primary-foreground">
             {title}
           </div>
-          <p className="text-sm leading-[1.4] text-muted-foreground">
+          <p className="text-sm leading-[1.4]  text-primary-foreground/70">
             {children}
           </p>
         </div>
