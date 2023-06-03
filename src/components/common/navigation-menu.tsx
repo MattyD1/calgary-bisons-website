@@ -89,7 +89,7 @@ const NavigationMenuViewport = React.forwardRef<
   <div className={tw("absolute left-0 top-full flex w-full pl-72")}>
     <NavigationMenuPrimitive.Viewport
       className={tw(
-        "relative -mt-[23px] h-[var(--radix-navigation-menu-viewport-height)] w-full origin-[top_center] overflow-hidden rounded-[6px] bg-secondary text-background transition-[width,_height] duration-300 data-[state=closed]:animate-scaleOut data-[state=open]:animate-scaleIn sm:w-[var(--radix-navigation-menu-viewport-width)]",
+        "relative -mt-[23px] h-[var(--radix-navigation-menu-viewport-height)] w-full origin-[top_center] overflow-hidden rounded-[6px] transition-[width,_height] duration-300 data-[state=closed]:animate-scaleOut data-[state=open]:animate-scaleIn sm:w-[var(--radix-navigation-menu-viewport-width)]",
         className
       )}
       ref={ref}

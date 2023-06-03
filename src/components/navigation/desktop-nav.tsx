@@ -20,16 +20,142 @@ import {
 
 import { buttonVariants } from "../common/button"
 
+interface IDesktopNavProps {
+  white?: boolean
+}
+
 // TODO: Clean this up it is a bit messy
-export const DesktopNav = () => {
+export const DesktopNav = ({ white }: IDesktopNavProps) => {
   const segment = useSelectedLayoutSegment()
+
+  const ListItem = React.forwardRef<
+    React.ElementRef<"a">,
+    React.ComponentPropsWithoutRef<"a">
+  >(({ className, children, title, ...props }, ref) => (
+    <li>
+      <NavigationMenuLink asChild>
+        {/* TODO: Replace with NextLink */}
+        <a
+          className={tw(
+            "focus:shadow-violet7 block select-none rounded-[6px] p-3 text-[15px] leading-none no-underline outline-none transition-colors focus:shadow-[0_0_0_2px]",
+            white ? "hover:bg-muted/50" : "hover:bg-muted/10",
+            className
+          )}
+          {...props}
+          ref={ref}
+        >
+          <div
+            className={tw(
+              "mb-[5px] font-medium leading-[1.2]",
+              white ? "text-foreground" : "text-primary-foreground"
+            )}
+          >
+            {title}
+          </div>
+          <p
+            className={tw(
+              "text-sm leading-[1.4]",
+              white ? "text-foreground/70" : "text-primary-foreground/70"
+            )}
+          >
+            {children}
+          </p>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  ))
+  ListItem.displayName = NavigationMenuLink.displayName
+
+  const ListItemImage = React.forwardRef<
+    React.ElementRef<"a">,
+    React.ComponentPropsWithoutRef<"a">
+  >(({ className, children, title, ...props }, ref) => (
+    <li>
+      <NavigationMenuLink asChild>
+        {/* TODO: Replace with NextLink */}
+        <a
+          className={tw(
+            "focus:shadow-violet7 flex select-none items-center gap-4 rounded-[6px] p-3 text-[15px] leading-none no-underline outline-none transition-colors focus:shadow-[0_0_0_2px]",
+            white ? "hover:bg-muted/50" : "hover:bg-muted/10",
+            className
+          )}
+          {...props}
+          ref={ref}
+        >
+          <div
+            className={tw(
+              "item-center relative flex h-full w-10 rounded-full  p-2",
+              white
+                ? "bg-muted text-muted-foreground"
+                : "bg-muted/20 text-primary"
+            )}
+          >
+            <Sword />
+          </div>
+          <div>
+            <div
+              className={tw(
+                "mb-[5px] font-medium leading-[1.2]",
+                white ? "text-foreground" : "text-secondary-foreground"
+              )}
+            >
+              {title}
+            </div>
+            <p
+              className={tw(
+                "text-sm leading-[1.4]",
+                white ? "text-foreground/70" : "text-primary-foreground/70"
+              )}
+            >
+              {children}
+            </p>
+          </div>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  ))
+  ListItemImage.displayName = NavigationMenuLink.displayName
+
+  const RosterItem = React.forwardRef<
+    React.ElementRef<"a">,
+    React.ComponentPropsWithoutRef<"a">
+  >(({ className, children, title, ...props }, ref) => (
+    <li>
+      <NavigationMenuLink asChild>
+        {/* TODO: Replace with NextLink */}
+
+        <a
+          className={tw(
+            "block select-none rounded-[6px] px-3 py-2 text-[15px] leading-none no-underline outline-none transition-colors focus:shadow-[0_0_0_2px]",
+            white ? "hover:bg-muted/50" : "hover:bg-muted/10",
+            className
+          )}
+          {...props}
+          ref={ref}
+        >
+          <div
+            className={tw(
+              "mb-[5px] text-sm font-medium leading-[1.2]",
+              white ? "text-foreground" : "text-secondary-foreground"
+            )}
+          >
+            {title}
+          </div>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  ))
+  RosterItem.displayName = NavigationMenuLink.displayName
 
   return (
     <NavigationMenu
       delayDuration={100}
       className={tw(
-        "absolute z-50 w-full gap-6 bg-transparent text-background",
-        "hidden xl:block"
+        "absolute z-50 w-full gap-6",
+        "hidden xl:block",
+        white
+          ? "bg-background text-foreground"
+          : "bg-transparent text-background"
       )}
     >
       <NavigationMenuList className="relative flex w-full items-center px-8 py-2">
@@ -59,12 +185,21 @@ export const DesktopNav = () => {
                 <li className="row-span-5 grid">
                   <NavigationMenuLink asChild>
                     <a
-                      className="focus:shadow-violet7 flex h-full w-full
-                    select-none flex-col justify-end rounded-[6px] bg-gradient-to-b from-muted/30 to-muted/10 p-[25px] no-underline outline-none focus:shadow-[0_0_0_2px]"
+                      className={tw(
+                        "focus:shadow-violet7 flex h-full w-full select-none flex-col justify-end rounded-[6px] bg-gradient-to-b p-[25px] no-underline outline-none focus:shadow-[0_0_0_2px]",
+                        white
+                          ? "from-muted/90 to-muted/50"
+                          : "from-muted/30 to-muted/10"
+                      )}
                       href="/"
                     >
                       <Dumbbell size={32} />
-                      <div className="mb-[7px] mt-4 text-[18px] font-medium leading-[1.2] text-white">
+                      <div
+                        className={tw(
+                          "mb-[7px] mt-4 text-[18px] font-medium leading-[1.2]",
+                          white ? "text-foregound" : "text-secondary-foreground"
+                        )}
+                      >
                         Off Season Training
                       </div>
                       <p className="text-mauve4 text-[14px] leading-[1.3]">
@@ -158,7 +293,7 @@ export const DesktopNav = () => {
             <NavigationMenuContent>
               <ul className="m-0 grid list-none gap-x-[10px] gap-y-[15px] p-[22px] sm:w-[700px] sm:grid-flow-col sm:grid-rows-1">
                 <li>
-                  <h1 className="px-3 text-sm font-semibold text-muted-foreground">
+                  <h1 className="mb-3 px-3 text-sm font-semibold text-muted-foreground">
                     18U Rosters
                   </h1>
                   <ul>
@@ -177,7 +312,7 @@ export const DesktopNav = () => {
                   </ul>
                 </li>
                 <li>
-                  <h1 className="px-3 text-sm font-semibold text-muted-foreground">
+                  <h1 className="mb-3 px-3 text-sm font-semibold text-muted-foreground">
                     15U Rosters
                   </h1>
                   <ul>
@@ -196,7 +331,7 @@ export const DesktopNav = () => {
                   </ul>
                 </li>
                 <li>
-                  <h1 className="px-3 text-sm font-semibold text-muted-foreground">
+                  <h1 className="mb-3 px-3 text-sm font-semibold text-muted-foreground">
                     13U Rosters
                   </h1>
                   <ul>
@@ -211,7 +346,7 @@ export const DesktopNav = () => {
                   </ul>
                 </li>
                 <li>
-                  <h1 className="px-3 text-sm font-semibold text-muted-foreground">
+                  <h1 className="mb-3 px-3 text-sm font-semibold text-muted-foreground">
                     11U Rosters
                   </h1>
                   <ul>
@@ -289,97 +424,14 @@ export const DesktopNav = () => {
         {/* <NavigationMenuIndicator /> */}
       </NavigationMenuList>
 
-      <NavigationMenuViewport className="data-[state=closed]:animate-scaleOut data-[state=open]:animate-scaleIn" />
+      <NavigationMenuViewport
+        className={tw(
+          "data-[state=closed]:animate-scaleOut data-[state=open]:animate-scaleIn",
+          white
+            ? "bg-background text-foreground shadow"
+            : "bg-secondary text-secondary-foreground"
+        )}
+      />
     </NavigationMenu>
   )
 }
-
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, children, title, ...props }, ref) => (
-  <li>
-    <NavigationMenuLink asChild>
-      {/* TODO: Replace with NextLink */}
-      <a
-        className={tw(
-          "focus:shadow-violet7 block select-none rounded-[6px] p-3 text-[15px] leading-none no-underline outline-none transition-colors hover:bg-muted/10 focus:shadow-[0_0_0_2px]",
-          className
-        )}
-        {...props}
-        ref={ref}
-      >
-        <div className="mb-[5px] font-medium leading-[1.2] text-primary-foreground">
-          {title}
-        </div>
-        <p className="text-sm leading-[1.4] text-primary-foreground/70">
-          {children}
-        </p>
-      </a>
-    </NavigationMenuLink>
-  </li>
-))
-ListItem.displayName = NavigationMenuLink.displayName
-
-const ListItemImage = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, children, title, ...props }, ref) => (
-  <li>
-    <NavigationMenuLink asChild>
-      {/* TODO: Replace with NextLink */}
-      <a
-        className={tw(
-          " focus:shadow-violet7 flex select-none items-center gap-4 rounded-[6px] p-3 text-[15px] leading-none no-underline outline-none transition-colors hover:bg-muted/10 focus:shadow-[0_0_0_2px]",
-          className
-        )}
-        {...props}
-        ref={ref}
-      >
-        <div className="item-center relative flex h-full w-10 rounded-full bg-muted/20 p-2 text-primary">
-          {/* <Image
-            src="/logo.svg"
-            alt="logo"
-            fill
-            style={{ objectFit: "contain" }}
-          /> */}
-          <Sword />
-        </div>
-        <div>
-          <div className="mb-[5px] font-medium leading-[1.2] text-primary-foreground">
-            {title}
-          </div>
-          <p className="text-sm leading-[1.4]  text-primary-foreground/70">
-            {children}
-          </p>
-        </div>
-      </a>
-    </NavigationMenuLink>
-  </li>
-))
-ListItemImage.displayName = NavigationMenuLink.displayName
-
-const RosterItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, children, title, ...props }, ref) => (
-  <li>
-    <NavigationMenuLink asChild>
-      {/* TODO: Replace with NextLink */}
-
-      <a
-        className={tw(
-          "block select-none rounded-[6px] px-3 py-2 text-[15px] leading-none no-underline outline-none transition-colors hover:bg-muted/10 focus:shadow-[0_0_0_2px]",
-          className
-        )}
-        {...props}
-        ref={ref}
-      >
-        <div className="mb-[5px] text-sm font-medium leading-[1.2] text-primary-foreground">
-          {title}
-        </div>
-      </a>
-    </NavigationMenuLink>
-  </li>
-))
-RosterItem.displayName = NavigationMenuLink.displayName
