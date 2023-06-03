@@ -12,35 +12,43 @@ query Home {
       ...heroImage
     }
     sections {
-      ...commonBlock
-      ...imageTextBlock
-      ...imageGalleryBlock
-      ...imagesWithTextBlock
-      ...videoBlock
+      ...sections
     }
     shaded {
-      ... on CommonBannerRecord {
-        id
-        name
-      }
-      ... on ImageTextRecord {
-        id
-        name
-      }
-      ... on ImagesWithGalleryRecord {
-        id
-        name
-      }
-      ... on ImagesWithTextRecord {
-        id
-        name
-      }
-      ... on VideoRecord {
-        id
-        name
-      }
+      ...shaded
     }
     position
+  }
+}
+
+fragment sections on LandingPageModelSectionsField {
+  ...commonBlock
+  ...imageTextBlock
+  ...imageGalleryBlock
+  ...imagesWithTextBlock
+  ...videoBlock
+}
+
+fragment shaded on LandingPageModelShadedField {
+  ... on CommonBannerRecord {
+    id
+    name
+  }
+  ... on ImageTextRecord {
+    id
+    name
+  }
+  ... on ImagesWithGalleryRecord {
+    id
+    name
+  }
+  ... on ImagesWithTextRecord {
+    id
+    name
+  }
+  ... on VideoRecord {
+    id
+    name
   }
 }
 
@@ -51,7 +59,7 @@ fragment heroImage on HeroImageRecord {
   hasButtons
   hasOverlay
   image {
-    ...responsiveImage
+    ...responsiveImageLandscape
   }
   buttons {
     color {
@@ -74,6 +82,7 @@ fragment heroImage on HeroImageRecord {
     value
   }
   showcaseBanner {
+    __typename
     hasHeading
     title
     id
@@ -116,7 +125,7 @@ fragment imageTextBlock on ImageTextRecord {
     hex
   }
   image {
-    ...responsiveImage
+    ...responsiveImagePortrait
   }
   text {
     value
@@ -143,6 +152,10 @@ fragment imageGalleryBlock on ImagesWithGalleryRecord {
   kicker
   text {
     value
+  }
+  isLink
+  galleryLink {
+    ...coach
   }
   gallery {
     hasText
@@ -212,11 +225,22 @@ fragment imageBlock on ImageWithTextRecord {
   heading
   id
   image {
-    ...responsiveImage
+    ...responsiveImageLandscape
   }
   text {
     value
   }
+}
+
+fragment coach on CoachRecord {
+  id
+  image {
+    ...responsiveImagePortrait
+  }
+  organizationalRole
+  hasOrganizationalRole
+  coachingRole
+  name
 }
 
 fragment links on PlacementRecord {
@@ -244,8 +268,40 @@ fragment button on ButtonRecord {
   label
 }
 
+fragment responsiveImagePortrait on FileFieldInterface {
+  responsiveImage(imgixParams: { fit: crop, ar: "4:5" }) {
+    alt
+    aspectRatio
+    base64
+    bgColor
+    height
+    sizes
+    src
+    srcSet
+    title
+    webpSrcSet
+    width
+  }
+}
+
+fragment responsiveImageLandscape on FileFieldInterface {
+  responsiveImage(imgixParams: { fit: crop, ar: "3:2" }) {
+    alt
+    aspectRatio
+    base64
+    bgColor
+    height
+    sizes
+    src
+    srcSet
+    title
+    webpSrcSet
+    width
+  }
+}
+
 fragment responsiveImage on FileFieldInterface {
-  responsiveImage(imgixParams: { sat: -100 }) {
+  responsiveImage {
     alt
     aspectRatio
     base64

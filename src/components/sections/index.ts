@@ -1,2 +1,5 @@
 export { CommonBanner } from "./common-banner"
-export { TextMultipleImages } from "./text-multiple-images"
+export { ImagesWithText } from "./images-with-text"
+export { ImageWithText } from "./image-with-text"
+export { Video } from "./video"
+export { GalleryWithText } from "./gallery-with-text"

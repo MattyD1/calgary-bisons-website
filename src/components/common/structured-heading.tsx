@@ -3,14 +3,16 @@ import clsx from "clsx"
 import { isParagraph } from "datocms-structured-text-utils"
 import {
   StructuredText,
+  StructuredTextDocument,
   renderMarkRule,
   renderNodeRule,
 } from "react-datocms/structured-text"
 
+import { StructuredText as StructuredTextType } from "@/types"
 import { HeroImageModelHeadingField } from "@/libs/graphql/generated"
 
 interface IHeadingProps {
-  heading: HeroImageModelHeadingField
+  heading: StructuredTextType
   highlightColor?: { bg: string; text: string }
   className: string
 }
@@ -18,7 +20,7 @@ interface IHeadingProps {
 const Heading = ({ heading, highlightColor, className }: IHeadingProps) => {
   return (
     <StructuredText
-      data={heading.value}
+      data={heading.value as StructuredTextDocument}
       customNodeRules={[
         renderNodeRule(
           isParagraph,

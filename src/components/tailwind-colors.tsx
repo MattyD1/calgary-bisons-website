@@ -9,7 +9,7 @@ export function TailwindColors() {
       <div className="flex h-6 w-6 items-center justify-center rounded-full bg-muted p-3 font-mono text-muted-foreground">
         m
       </div>
-      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-popover p-3 font-mono text-popover-foreground">
+      <div className="bg-popover text-popover-foreground flex h-6 w-6 items-center justify-center rounded-full p-3 font-mono">
         p
       </div>
       <div className="flex h-6 w-6 items-center justify-center rounded-full bg-border p-3 font-mono" />

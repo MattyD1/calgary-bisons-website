@@ -1,47 +1,45 @@
+"use client"
+
 import React from "react"
 import clsx from "clsx"
 import { Image } from "react-datocms/image"
 
-import {
-  ButtonRecord,
-  HeroImageModelHeadingField,
-  HeroImageModelParagraphField,
-  ImageAltTitleFileField,
-  Maybe,
-} from "@/libs/graphql/generated"
+import { HeroImageFragment } from "@/libs/graphql/generated"
+import { getHighlightColor, getOverlay, tw } from "@/libs/utils"
 import { Heading } from "@/components/common/structured-heading"
 import { Paragraph } from "@/components/common/structured-paragraph"
 
-import { Button } from "../../common/button"
-import { CommonBanner } from "../../sections"
-
-interface IBannerProps {
-  highlight?: { bg: string; text: string; before: string }
-  overlay?: string
-  heading: HeroImageModelHeadingField
-  body?: Maybe<HeroImageModelParagraphField>
-  image: ImageAltTitleFileField
-  buttons: ButtonRecord[]
-  lowerBanner: any
-}
+import { CommonBanner } from "../sections"
 
 const HeroImage = ({
-  highlight,
-  overlay,
-  heading,
-  body,
+  highlightColor,
+  hasOverlay,
+  overlayColor,
   image,
-  buttons,
-  lowerBanner,
-}: IBannerProps) => {
-  console.log(overlay)
+  heading,
+  paragraph,
+  showcaseBanner,
+}: HeroImageFragment) => {
+  const highlight = highlightColor
+    ? getHighlightColor(highlightColor)
+    : undefined
+
+  const overlay =
+    hasOverlay && overlayColor ? getOverlay(overlayColor) : undefined
+
+  console.log(image)
   return (
     <section>
       <div className="relative min-h-2/3 w-full">
         {/* Banner Image */}
         <div className="absolute h-full w-full">
           {/* Image */}
-          <Image data={image.responsiveImage} layout="fill" objectFit="cover" />
+          <Image
+            className="saturate-0"
+            data={image.responsiveImage}
+            layout="fill"
+            objectFit="cover"
+          />
 
           {/* Overlay */}
           {overlay && (
@@ -52,20 +50,29 @@ const HeroImage = ({
         </div>
 
         {/* Banner Content */}
-        <div className="absolute mx-32 flex h-full flex-col justify-center gap-5 pt-12 text-primary-foreground">
+        <div
+          className={tw(
+            "absolute  flex h-full flex-col justify-center gap-5 pt-12 text-primary-foreground ",
+            "mx-8 sm:mx-16 md:mx-32 md:items-start"
+          )}
+        >
           {/* Title */}
           <Heading
             heading={heading}
             highlightColor={highlight}
-            className={clsx("max-w-[16ch] font-heading text-5xl font-black")}
+            className={clsx(
+              "max-w-[16ch] font-heading font-black",
+              "text-3xl sm:text-4xl lg:text-5xl"
+            )}
           />
 
           {/* Description */}
           <Paragraph
-            body={body}
+            body={paragraph}
             highlightColor={highlight}
             className={clsx(
-              "max-w-[55ch] font-sans text-lg font-medium text-primary-foreground"
+              "max-w-[55ch] font-sans font-medium text-primary-foreground",
+              "text-sm sm:text-base md:text-lg"
             )}
           />
 
@@ -81,7 +88,7 @@ const HeroImage = ({
         </div>
       </div>
       {/* Lower Banner */}
-      {lowerBanner && <CommonBanner {...lowerBanner} />}
+      {showcaseBanner && <CommonBanner {...showcaseBanner} />}
     </section>
   )
 }

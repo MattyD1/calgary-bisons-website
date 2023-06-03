@@ -1,12 +1,17 @@
 import React from "react"
+import { tw } from "@/src/libs/utils"
 import clsx from "clsx"
 import { Maybe } from "graphql/jsutils/Maybe"
-import { StructuredText, renderMarkRule } from "react-datocms/structured-text"
+import {
+  StructuredText,
+  StructuredTextDocument,
+  renderMarkRule,
+} from "react-datocms/structured-text"
 
-import { HeroImageModelParagraphField } from "@/libs/graphql/generated"
+import { StructuredText as StructuredTextType } from "@/types"
 
 interface IParagraphProps {
-  body?: Maybe<HeroImageModelParagraphField>
+  body?: StructuredTextType
   highlightColor?: { bg: string; text: string; before: string }
   className: string
 }
@@ -17,7 +22,7 @@ const Paragraph = ({ body, highlightColor, className }: IParagraphProps) => {
   return (
     <div className={className}>
       <StructuredText
-        data={body.value}
+        data={body.value as StructuredTextDocument}
         customMarkRules={[
           renderMarkRule("underline", ({ children, key }) => {
             if (!highlightColor)
@@ -26,8 +31,8 @@ const Paragraph = ({ body, highlightColor, className }: IParagraphProps) => {
             return (
               <span
                 key={key}
-                className={clsx(
-                  `relative inline-block h-full before:absolute before:-bottom-[2px] before:block before:h-[3px] before:w-full`,
+                className={tw(
+                  `relative inline-block h-full before:absolute before:-bottom-[2px] before:block before:h-[3px] before:w-full before:bg-accent`,
                   highlightColor.before
                 )}
               >
@@ -42,7 +47,7 @@ const Paragraph = ({ body, highlightColor, className }: IParagraphProps) => {
             return (
               <span
                 key={key}
-                className={clsx(
+                className={tw(
                   `relative inline-block h-full before:absolute before:top-1/2 before:block before:h-[3px] before:w-full`,
                   highlightColor.before
                 )}

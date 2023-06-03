@@ -12,6 +12,7 @@ module.exports = {
     "",
     "^types$",
     "^@/env(.*)$",
+    "^@/types$",
     "^@/types/(.*)$",
     "^@/config/(.*)$",
     "^@/libs/(.*)$",

@@ -10,11 +10,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-aspect-ratio": "^1.0.2",
     "@radix-ui/react-navigation-menu": "^1.1.2",
     "@t3-oss/env-nextjs": "^0.3.1",
+    "@tailwindcss/typography": "^0.5.9",
     "@vercel/analytics": "^1.0.1",
+    "axios": "^1.4.0",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
+    "embla-carousel-react": "^8.0.0-rc05",
     "graphql": "^16.6.0",
     "graphql-request": "^6.0.0",
     "lucide-react": "^0.220.0",
@@ -32,6 +36,7 @@
     "@graphql-codegen/typescript-operations": "^3.0.4",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "@types/node": "20.2.3",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
