@@ -13,7 +13,7 @@ export const MainNav = ({ white }: IMainNavProps) => {
   return (
     <div className="">
       <DesktopNav white={white} />
-      <MobileNav />
+      <MobileNav white={white} />
     </div>
   )
 }

@@ -151,17 +151,20 @@ export const DesktopNav = ({ white }: IDesktopNavProps) => {
     <NavigationMenu
       delayDuration={100}
       className={tw(
-        "absolute z-50 w-full gap-6",
+        "z-50 w-full gap-6",
         "hidden xl:block",
         white
-          ? "bg-background text-foreground"
-          : "bg-transparent text-background"
+          ? "absolute bg-background text-foreground"
+          : "absolute bg-transparent text-background"
       )}
     >
       <NavigationMenuList className="relative flex w-full items-center px-8 py-2">
         {/* XXX:Logo */}
         <NavigationMenuItem className="mr-10">
-          <NavigationMenuLink className="flex items-center justify-center gap-1">
+          <NavigationMenuLink
+            className="flex items-center justify-center gap-1"
+            href="/"
+          >
             <div className=" relative flex h-20 w-20 items-center justify-center">
               <Image
                 src="/logo.svg"
@@ -393,6 +396,7 @@ export const DesktopNav = ({ white }: IDesktopNavProps) => {
                 navigationMenuTriggerStyle(),
                 "highlight cursor-pointer"
               )}
+              href="/schedule"
             >
               Game Schedule
             </NavigationMenuLink>

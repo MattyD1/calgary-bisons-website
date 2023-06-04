@@ -60,11 +60,13 @@ const GetTeams = async (ageGroups: any): Promise<any | void> => {
     // const response = await getAgeGroupsByLeague(ageGroups)
     const map = await Promise.all(
       ageGroups.map(async (ageGroup) => {
+        const name = ageGroup.data.find((data) => data.name === "name")
+
         const response = await getTeamsByAges(ageGroup)
 
         const json = await response.data
 
-        return json.collection
+        return { [name.value]: json.collection }
       })
     )
 
