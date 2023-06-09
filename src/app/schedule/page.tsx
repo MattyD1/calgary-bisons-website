@@ -1,14 +1,18 @@
 import React from "react"
-import { tw } from "@/src/libs/utils"
+import { HeroImage } from "@/src/components/banners/hero-image"
+import { renderMetaTags } from "react-datocms/seo"
 
+import { ScheduleDocument, ScheduleQuery } from "@/libs/graphql/generated"
 import { GetActiveTeams } from "@/libs/query/functions/teams"
+import { request } from "@/libs/request"
+import { tw } from "@/libs/utils"
 
 import Content from "./content"
 import EventList from "./event-list"
 import Sidebar from "./sidebar"
 
-const GameSchedule = async () => {
-  const teams = await GetActiveTeams(
+async function GetTeams() {
+  return await GetActiveTeams(
     // Organization
     "Canadian Pro Baseball Academy",
     // Age Groups
@@ -17,14 +21,26 @@ const GameSchedule = async () => {
     "13U",
     "11U"
   )
+}
+
+async function GetPage() {
+  const res: ScheduleQuery = await request(ScheduleDocument)
+
+  return res.allSchedulePages[0]
+}
+
+const GameSchedule = async () => {
+  const teamsData = GetTeams()
+  const pageData = GetPage()
+
+  const [teams, page] = await Promise.all([teamsData, pageData])
 
   return (
     <main>
-      <section className={tw("m-auto flex w-full flex-col gap-8 px-8 py-32")}>
-        <div>
-          <h1 className="font-heading text-4xl font-black">Schedule</h1>
-        </div>
-        <div className={tw("m-auto w-full", "flex gap-10")}>
+      {renderMetaTags(page._seoMetaTags)}
+      <HeroImage {...page.heroBanner} />
+      <section className={tw("m-auto flex w-full flex-col gap-8")}>
+        <div className={tw("flex flex-col md:flex-row ")}>
           <Sidebar teams={teams} />
           <Content />
         </div>

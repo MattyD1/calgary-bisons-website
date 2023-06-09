@@ -90,7 +90,7 @@ const Calendar = () => {
         <div
           className={tw(
             "mb-2 grid  gap-1  lg:gap-2",
-            "grid-cols-[repeat(7,_minmax(32px,_32px))] md:grid-cols-[repeat(7,_minmax(36px,_36px))] lg:grid-cols-[repeat(7,_minmax(40px,_40px))]"
+            "grid-cols-[repeat(7,_minmax(40px,_40px))] sm:grid-cols-[repeat(7,_minmax(32px,_32px))] md:grid-cols-[repeat(7,_minmax(36px,_36px))] lg:grid-cols-[repeat(7,_minmax(40px,_40px))]"
           )}
         >
           {["SU", "MO", "TU", "WE", "TH", "FR", "SA"].map((day, index) => (
@@ -105,7 +105,7 @@ const Calendar = () => {
         <div
           className={tw(
             "grid gap-1 lg:gap-2",
-            "grid-cols-[repeat(7,_minmax(32px,_32px))] md:grid-cols-[repeat(7,_minmax(36px,_36px))] lg:grid-cols-[repeat(7,_minmax(40px,_40px))]"
+            "grid-cols-[repeat(7,_minmax(40px,_40px))] sm:grid-cols-[repeat(7,_minmax(32px,_32px))] md:grid-cols-[repeat(7,_minmax(36px,_36px))] lg:grid-cols-[repeat(7,_minmax(40px,_40px))]"
           )}
         >
           {days.map((day, index) => (

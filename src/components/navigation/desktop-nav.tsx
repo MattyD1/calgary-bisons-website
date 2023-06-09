@@ -398,7 +398,7 @@ export const DesktopNav = ({ white }: IDesktopNavProps) => {
               )}
               href="/schedule"
             >
-              Game Schedule
+              Schedule
             </NavigationMenuLink>
           </NavigationMenuItem>
 
@@ -418,7 +418,8 @@ export const DesktopNav = ({ white }: IDesktopNavProps) => {
           <NavigationMenuItem>
             <NavigationMenuLink
               className={tw(
-                buttonVariants({ hierarchy: "default", size: "default" })
+                buttonVariants({ hierarchy: "default", size: "default" }),
+                "ml-px"
               )}
             >
               Register

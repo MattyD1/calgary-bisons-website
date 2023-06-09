@@ -45,7 +45,7 @@ const SelectTeams = ({ teams }: any) => {
   console.log(selectedTeams)
 
   return (
-    <div className="mt-4">
+    <div className="mt-4 grow">
       {/* <h2 className="font-heading text-lg font-semibold lg:text-xl">Teams</h2> */}
       <Command className="">
         <CommandInput placeholder="Search for a team..." />

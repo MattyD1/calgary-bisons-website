@@ -32,9 +32,9 @@ const EventList = () => {
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-3">
       {data?.map((event, index) => {
-        if (!event) return <p>No Events</p>
+        if (!event) return
 
         const idObject = event.data.find((data) => data.name === "team_id")
         const timeObject = event.data.find((data) => data.name === "start_date")
@@ -64,14 +64,14 @@ const EventList = () => {
           <div
             key={index}
             className={tw(
-              "relative flex items-center rounded-md",
+              "relative mx-auto flex w-full max-w-5xl flex-col gap-2 rounded-md border-l-4 sm:flex-row sm:items-center sm:gap-0",
               isCanceledObject.value
                 ? "striped border-foreground/25"
-                : "border-accent bg-background",
-              isGameObject.value && "border-l-4"
+                : "border-background bg-background",
+              isGameObject.value && "border-accent"
             )}
           >
-            <div className="w-[10ch] p-4 text-right font-heading text-3xl font-black">
+            <div className="px-4 pt-4 font-heading text-2xl font-black sm:w-[10ch] sm:p-4 sm:text-right lg:text-3xl">
               {isTBDObject.value ? (
                 <p>TBD</p>
               ) : (
@@ -83,8 +83,8 @@ const EventList = () => {
                 </h1>
               )}
             </div>
-            <div className="h-10 w-[2px] rounded bg-muted" />
-            <div className="p-4">
+            <div className="hidden h-10 w-[2px] rounded bg-muted sm:block" />
+            <div className="px-4 pb-4 text-sm sm:p-4 lg:text-base">
               <div className="flex items-center gap-2">
                 {isGameObject.value ? (
                   <Swords

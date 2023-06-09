@@ -11,7 +11,7 @@ const Sidebar = (props: any) => {
   const queryClient = new QueryClient()
 
   return (
-    <section>
+    <section className="flex flex-col gap-4 p-8 shadow-sm shadow-accent sm:flex-row md:flex-col">
       <QueryClientProvider client={queryClient}>
         <Calendar />
         <SelectTeams teams={props.teams} />

@@ -9,7 +9,7 @@ interface IRootLayoutProps {
 const ScheduleLayout = ({ children }: IRootLayoutProps) => {
   return (
     <>
-      <MainNav white />
+      <MainNav />
       {children}
     </>
   )

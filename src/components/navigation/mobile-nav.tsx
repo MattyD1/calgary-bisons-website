@@ -31,13 +31,13 @@ const MobileNav = ({ white }: IMobileNavProps) => {
     <div
       className={tw(
         "z-50 w-full gap-6 text-background",
-        "block xl:hidden",
+        "xl:hidden",
         white
-          ? "bg-background text-foreground"
+          ? "absolute bg-transparent text-foreground"
           : "absolute bg-transparent text-background",
         showMobileMenu
           ? "bg-secondary text-secondary-foreground"
-          : "bg-background"
+          : "bg-transparent"
       )}
     >
       <div className="flex items-center justify-between px-8 py-4 md:py-2">
