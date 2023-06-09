@@ -5,11 +5,15 @@ import React from "react"
 import { DesktopNav } from "./desktop-nav"
 import MobileNav from "./mobile-nav"
 
-export const MainNav = () => {
+interface IMainNavProps {
+  white?: boolean
+}
+
+export const MainNav = ({ white }: IMainNavProps) => {
   return (
     <div className="">
-      <DesktopNav />
-      <MobileNav />
+      <DesktopNav white={white} />
+      <MobileNav white={white} />
     </div>
   )
 }

@@ -1,5 +1,5 @@
-query Home {
-  allLandingPages {
+query Schedule {
+  allSchedulePages {
     id
     _status
     _firstPublishedAt
@@ -10,12 +10,6 @@ query Home {
     }
     heroBanner {
       ...heroImage
-    }
-    sections {
-      ...sections
-    }
-    shaded {
-      ...shaded
     }
     position
   }

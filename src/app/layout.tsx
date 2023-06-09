@@ -16,8 +16,6 @@ import { Analytics } from "@/components/analytics"
 import { TailwindColors } from "@/components/tailwind-colors"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 
-import { MainNav } from "../components/navigation/main-nav"
-
 const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" })
 const heading = Heading({ subsets: ["latin"], variable: "--font-heading" })
 const arvo = Arvo({
@@ -45,7 +43,6 @@ export default async function RootLayout({ children }: IRootLayoutProps) {
         )}
         suppressHydrationWarning={true}
       >
-        <MainNav />
         {children}
         <Analytics />
         <TailwindIndicator />

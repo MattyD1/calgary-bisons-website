@@ -1,9 +1,9 @@
-"use client"
-
-import { LinkFilter } from "../libs/team-snap"
+import { env } from "@/env.mjs"
 
 export function TeamSnap(ageGroups: any) {
   console.log(ageGroups)
+  const token = env.NEXT_PUBLIC_TEAMSNAP_AUTH_TOKEN
+  console.log(token)
 
   // const test = LinkFilter(
   //   ageGroups.ageGroups[0].links,

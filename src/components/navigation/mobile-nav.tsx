@@ -20,15 +20,24 @@ import {
 
 import { buttonVariants } from "../common/button"
 
-const MobileNav = () => {
+interface IMobileNavProps {
+  white?: boolean
+}
+
+const MobileNav = ({ white }: IMobileNavProps) => {
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false)
 
   return (
     <div
       className={tw(
-        "absolute z-50 w-full gap-6 text-background",
-        "block xl:hidden",
-        showMobileMenu ? "bg-secondary" : "bg-transparent"
+        "z-50 w-full gap-6 text-background",
+        "xl:hidden",
+        white
+          ? "absolute bg-transparent text-foreground"
+          : "absolute bg-transparent text-background",
+        showMobileMenu
+          ? "bg-secondary text-secondary-foreground"
+          : "bg-transparent"
       )}
     >
       <div className="flex items-center justify-between px-8 py-4 md:py-2">
