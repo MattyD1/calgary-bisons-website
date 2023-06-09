@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import {
   add,
   format,
@@ -13,15 +13,20 @@ import {
 import { eachDayOfInterval, endOfMonth } from "date-fns/esm"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
+import { useEvents } from "../libs/query/functions/events"
+import { useScheduleStore } from "../libs/stores"
 import { tw } from "../libs/utils"
 
-interface ICalendarProps {
-  data: any[]
-}
+const Calendar = () => {
+  const setDates = useScheduleStore((state) => state.setDates)
+  const dates = useScheduleStore((state) => state.dates)
+  const [selectedDay, setSelectedDay] = useScheduleStore((state) => [
+    state.selectedDate,
+    state.setSelectedDate,
+  ])
+  const selectedTeams = useScheduleStore((state) => state.teams)
 
-const Calendar = ({ data }: ICalendarProps) => {
   let today = startOfToday()
-  const [selectedDay, setSelectedDay] = useState(today)
   const [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"))
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date())
 
@@ -33,12 +38,32 @@ const Calendar = ({ data }: ICalendarProps) => {
   const previousMonth = () => {
     let firstDayNextMonth = add(firstDayCurrentMonth, { months: -1 })
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"))
+    setDates({
+      start: format(firstDayNextMonth, "yyyy-MM-dd"),
+      end: format(endOfMonth(firstDayNextMonth), "yyyy-MM-dd"),
+    })
   }
 
   const nextMonth = () => {
     let firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 })
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"))
+    setDates({
+      start: format(firstDayNextMonth, "yyyy-MM-dd"),
+      end: format(endOfMonth(firstDayNextMonth), "yyyy-MM-dd"),
+    })
   }
+
+  useEffect(() => {
+    setDates({
+      start: format(firstDayCurrentMonth, "yyyy-MM-dd"),
+      end: format(endOfMonth(firstDayCurrentMonth), "yyyy-MM-dd"),
+    })
+  }, [])
+
+  const { data, isLoading, isFetching } = useEvents({
+    teamId: selectedTeams.map((team: any) => team.id),
+    dates: dates,
+  })
 
   return (
     <div>
@@ -102,17 +127,26 @@ const Calendar = ({ data }: ICalendarProps) => {
                 )}
               >
                 {format(day, "d")}
-                {data.some((event) =>
-                  isSameDay(parseISO(event.start_time), day)
-                ) && (
-                  <div
-                    className={tw(
-                      "h-1 w-1 rounded-full bg-accent",
-                      isSameDay(selectedDay, day)
-                        ? "bg-background"
-                        : "bg-accent"
+                {isLoading ? (
+                  <div>
+                    <div className={tw("h-1 w-1 rounded-full bg-muted")} />
+                  </div>
+                ) : (
+                  <>
+                    {data?.some((event) => {
+                      // event.data.find((data) => data.name === "start_date")
+                      return isSameDay(parseISO(event?.data[32]?.value), day)
+                    }) && (
+                      <div
+                        className={tw(
+                          "h-1 w-1 rounded-full bg-accent",
+                          isSameDay(selectedDay, day)
+                            ? "bg-background"
+                            : "bg-accent"
+                        )}
+                      />
                     )}
-                  />
+                  </>
                 )}
               </button>
             </div>

@@ -7,15 +7,15 @@ import { env } from "@/env.mjs"
  * @param user The TeamSnap user object
  * @returns The TeamSnap league object
  */
-export const getAgeGroupsByLeague = async (
-  league: any
+export const getTeamsByAges = async (
+  ageGroups: any
 ): Promise<AxiosResponse<any, any>> => {
   /* Get Self Data */
-  const ageGroups = league.links.find((link) => link.rel === "descendants")
+  const teams = ageGroups.links.find((link) => link.rel === "active_teams")
 
-  return await axios.get(ageGroups.href, {
+  return await axios.get(teams.href, {
     headers: {
-      Authorization: `Bearer ${env.TEAMSNAP_AUTH_TOKEN}`,
+      Authorization: `Bearer ${env.NEXT_PUBLIC_TEAMSNAP_AUTH_TOKEN}`,
     },
   })
 }

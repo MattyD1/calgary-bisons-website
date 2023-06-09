@@ -1,10 +1,12 @@
-import { MainNav } from "@/src/components/navigation/main-nav"
+import React from "react"
+
+import { MainNav } from "@/components/navigation/main-nav"
 
 interface IRootLayoutProps {
   children: React.ReactNode
 }
 
-export default function ScheduleLayout({ children }: IRootLayoutProps) {
+const ScheduleLayout = ({ children }: IRootLayoutProps) => {
   return (
     <>
       <MainNav white />
@@ -12,3 +14,5 @@ export default function ScheduleLayout({ children }: IRootLayoutProps) {
     </>
   )
 }
+
+export default ScheduleLayout

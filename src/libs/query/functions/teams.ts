@@ -82,7 +82,15 @@ const GetTeams = async (ageGroups: any): Promise<any | void> => {
   return teams
 }
 
-export const TeamsByAgeGroup = async (
+/**
+ * **Get all** active teams for an organization and age groups
+ *
+ *
+ * @param organization Organization the teams are in
+ * @param ages Age groups to get teams for
+ * @returns
+ */
+export const GetActiveTeams = async (
   organization: string,
   ...ages: string[]
 ) => {

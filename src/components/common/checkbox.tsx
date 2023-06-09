@@ -14,7 +14,8 @@ const Checkbox = React.forwardRef<
     <CheckboxPrimitive.Root
       ref={ref}
       className={tw(
-        "rounded-md border border-muted-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground",
+        "rounded-md border border-muted-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+        "data-[state=checked]:border-accent data-[state=indeterminate]:border-accent data-[state=checked]:bg-accent data-[state=indeterminate]:bg-accent data-[state=checked]:text-accent-foreground data-[state=indeterminate]:text-accent-foreground",
         className
       )}
       {...props}
@@ -26,7 +27,6 @@ const Checkbox = React.forwardRef<
           <Minus className="h-[15px] w-[15px]" />
         )}
         {props.checked === true && <Check className="h-[15px] w-[15px]" />}
-        <Check className="h-[15px] w-[15px]" />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
   )

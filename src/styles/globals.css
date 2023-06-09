@@ -45,4 +45,14 @@
   .highlight {
     @apply relative after:absolute after:right-0 after:mt-7 after:block after:h-[3px] after:w-0 after:bg-accent after:content-[''] after:duration-200 after:ease-in hover:after:left-0 hover:after:w-full hover:after:bg-accent
   }
+
+  .striped {
+    background: repeating-linear-gradient(
+    -60deg,
+    hsl(var(--background)),
+    hsl(var(--background)) 15px,
+    hsl(var(--muted)) 15px,
+    hsl(var(--muted)) 25px
+  );
+  }
 }

@@ -1,74 +1,74 @@
-import { env } from "@/env.mjs"
-import { AgeGroups } from "@/types"
+// import { env } from "@/env.mjs"
+// import { AgeGroups } from "@/types"
 
-const getTeamSnap = async (teamId: string) => {
-  const response = await fetch(`https://api.teamsnap.com/v3/teams/${teamId}`, {
-    headers: {
-      Authorization: `Bearer ${env.TEAMSNAP_AUTH_TOKEN}`,
-    },
-  })
-  const json = await response.json()
-  return json
-}
+// const getTeamSnap = async (teamId: string) => {
+//   const response = await fetch(`https://api.teamsnap.com/v3/teams/${teamId}`, {
+//     headers: {
+//       Authorization: `Bearer ${env.NEXT_PUBLIC_TEAMSNAP_AUTH_TOKEN}`,
+//     },
+//   })
+//   const json = await response.json()
+//   return json
+// }
 
-/**
- *
- * @param organizationName The name of the organization you would like to fetch
- * @returns The TeamSnap organization object
- */
-export const getSelf = async (organizationName: string): Promise<JSON> => {
-  /* Get Self Data */
-  const response = await fetch(`https://api.teamsnap.com/v3/me`, {
-    headers: {
-      Authorization: `Bearer ${env.TEAMSNAP_AUTH_TOKEN}`,
-    },
-  })
-  const json = await response.json()
+// /**
+//  *
+//  * @param organizationName The name of the organization you would like to fetch
+//  * @returns The TeamSnap organization object
+//  */
+// export const getSelf = async (organizationName: string): Promise<JSON> => {
+//   /* Get Self Data */
+//   const response = await fetch(`https://api.teamsnap.com/v3/me`, {
+//     headers: {
+//       Authorization: `Bearer ${env.NEXT_PUBLIC_TEAMSNAP_AUTH_TOKEN}`,
+//     },
+//   })
+//   const json = await response.json()
 
-  return json
-}
+//   return json
+// }
 
-export const getLeagueByName = async (user: any) => {
-  const leaguesObject = user.collection.items[0].links.find(
-    (link) => link.rel === "divisions"
-  )
+// export const getLeagueByName = async (user: any) => {
+//   const leaguesObject = user.collection.items[0].links.find(
+//     (link) => link.rel === "divisions"
+//   )
 
-  const response = await fetch(leaguesObject.href, {
-    headers: {
-      Authorization: `Bearer ${env.TEAMSNAP_AUTH_TOKEN}`,
-    },
-  })
+//   const response = await fetch(leaguesObject.href, {
+//     headers: {
+//       Authorization: `Bearer ${env.NEXT_PUBLIC_TEAMSNAP_AUTH_TOKEN}`,
+//     },
+//   })
 
-  const json = await response.json()
-  return json
-}
+//   const json = await response.json()
+//   return json
+// }
 
-export const getLeagueAgeGroupsByName = async (league: any) => {
-  const divisionsObject = league.collection.items[0].links.find(
-    (link) => link.rel === "descendants"
-  )
+// export const getLeagueAgeGroupsByName = async (league: any) => {
+//   const divisionsObject = league.collection.items[0].links.find(
+//     (link) => link.rel === "descendants"
+//   )
 
-  const response = await fetch(divisionsObject.href, {
-    headers: {
-      Authorization: `Bearer ${env.TEAMSNAP_AUTH_TOKEN}`,
-    },
-  })
+//   const response = await fetch(divisionsObject.href, {
+//     headers: {
+//       Authorization: `Bearer ${env.NEXT_PUBLIC_TEAMSNAP_AUTH_TOKEN}`,
+//     },
+//   })
 
-  const json = await response.json()
-  return json
-}
+//   const json = await response.json()
+//   return json
+// }
 
-const LinkFind = (links: any, rel: string) => {
-  const object = links.find((link) => link.rel === rel)
+// const LinkFind = (links: any, rel: string) => {
+//   const object = links.find((link) => link.rel === rel)
 
-  return object
-}
+//   return object
+// }
 
-export const LinkFilter = (links: any, ...rel: string[]) => {
-  const objects = links.filter((link) => rel.includes(link.rel))
+// export const LinkFilter = (links: any, ...rel: string[]) => {
+//   const objects = links.filter((link) => rel.includes(link.rel))
 
-  return objects
-}
+//   return objects
+// }
 
 // export const getTeams = async (organization: string, ...ages: AgeGroups[]) => {
 //   const ageGroups = await getAgeGroups(organization, ...ages)
@@ -81,7 +81,7 @@ export const LinkFilter = (links: any, ...rel: string[]) => {
 
 //       const teamsResponse = await fetch(teams.href, {
 //         headers: {
-//           Authorization: `Bearer ${env.TEAMSNAP_AUTH_TOKEN}`,
+//           Authorization: `Bearer ${env.NEXT_PUBLIC_TEAMSNAP_AUTH_TOKEN}`,
 //         },
 //       })
 
@@ -105,7 +105,7 @@ export const LinkFilter = (links: any, ...rel: string[]) => {
 
 //   const orgsResponse = await fetch(orgs.href, {
 //     headers: {
-//       Authorization: `Bearer ${env.TEAMSNAP_AUTH_TOKEN}`,
+//       Authorization: `Bearer ${env.NEXT_PUBLIC_TEAMSNAP_AUTH_TOKEN}`,
 //     },
 //   })
 
@@ -124,7 +124,7 @@ export const LinkFilter = (links: any, ...rel: string[]) => {
 
 //   const descendantsResponse = await fetch(descendants.href, {
 //     headers: {
-//       Authorization: `Bearer ${env.TEAMSNAP_AUTH_TOKEN}`,
+//       Authorization: `Bearer ${env.NEXT_PUBLIC_TEAMSNAP_AUTH_TOKEN}`,
 //     },
 //   })
 

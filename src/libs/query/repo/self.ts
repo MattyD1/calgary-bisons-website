@@ -11,7 +11,7 @@ export const getSelf = async (): Promise<AxiosResponse<any, any>> => {
   /* Get Self Data */
   return await axios.get(`https://api.teamsnap.com/v3/me`, {
     headers: {
-      Authorization: `Bearer ${env.TEAMSNAP_AUTH_TOKEN}`,
+      Authorization: `Bearer ${env.NEXT_PUBLIC_TEAMSNAP_AUTH_TOKEN}`,
     },
   })
 }

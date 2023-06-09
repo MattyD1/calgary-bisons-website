@@ -17,7 +17,7 @@ export const getLeagueByUser = async (
 
   return await axios.get(leaguesObject.href, {
     headers: {
-      Authorization: `Bearer ${env.TEAMSNAP_AUTH_TOKEN}`,
+      Authorization: `Bearer ${env.NEXT_PUBLIC_TEAMSNAP_AUTH_TOKEN}`,
     },
   })
 }
